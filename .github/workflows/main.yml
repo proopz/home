@@ -1,4 +1,4 @@
-name: Print GitHub Secrets
+name: Display GitHub Secrets
 
 on:
   push:
@@ -6,12 +6,27 @@ on:
       - main
 
 jobs:
-  print-secrets:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Print GitHub Secrets
-      run: |
-        echo "Authentication Host: ${{ secrets.AUTH_HOST }}"
-        echo "Authentication Username: ${{ secrets.AUTH_UN }}"
-        echo "Authentication Token: ${{ secrets.AUTHTOK }}"
-        echo "Authentication Target: ${{ secrets.AUTH_TO }}"
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Inject secrets into HTML
+        run: |
+          echo "<script>" > secrets.js
+          echo "const authHost = '${{ secrets.AUTH_HOST }}';" >> secrets.js
+          echo "const authUsername = '${{ secrets.AUTH_UN }}';" >> secrets.js
+          echo "const authToken = '${{ secrets.AUTHTOK }}';" >> secrets.js
+          echo "const authTarget = '${{ secrets.AUTH_TO }}';" >> secrets.js
+          echo "</script>" >> secrets.js
+          cp secrets.js src/secrets.js  # Assuming your JavaScript file is in a 'src' directory
