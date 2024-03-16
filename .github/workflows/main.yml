@@ -1,4 +1,4 @@
-name: Generate env.js
+name: Print GitHub Secrets
 
 on:
   push:
@@ -6,26 +6,12 @@ on:
       - main
 
 jobs:
-  build:
+  print-secrets:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Create env.js
-        run: |
-          echo "const env = {" > env.js
-          echo "  AUTH_HOST: '${{ secrets.AUTH_HOST }}'," >> env.js
-          echo "  AUTH_UN: '${{ secrets.AUTH_UN }}'," >> env.js
-          echo "  AUTHTOK: '${{ secrets.AUTHTOK }}'," >> env.js
-          echo "  AUTH_TO: '${{ secrets.AUTH_TO }}'" >> env.js
-          echo "};" >> env.js
+    - name: Print GitHub Secrets
+      run: |
+        echo "Authentication Host: ${{ secrets.AUTH_HOST }}"
+        echo "Authentication Username: ${{ secrets.AUTH_UN }}"
+        echo "Authentication Token: ${{ secrets.AUTHTOK }}"
+        echo "Authentication Target: ${{ secrets.AUTH_TO }}"
