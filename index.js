@@ -11,4 +11,3 @@ secretsList.innerHTML += `<li>Authentication Host: ${authHost}</li>`;
 secretsList.innerHTML += `<li>Authentication Username: ${authUsername}</li>`;
 secretsList.innerHTML += `<li>Authentication Token: ${authToken}</li>`;
 secretsList.innerHTML += `<li>Authentication Target: ${authTarget}</li>`;
-
