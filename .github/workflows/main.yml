@@ -1,0 +1,24 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and deploy
+        env:
+          AUTH_HOST: ${{ secrets.AUTH_HOST }}
+          AUTH_UN: ${{ secrets.AUTH_UN }}
+          AUTHTOK: ${{ secrets.AUTHTOK }}
+          AUTH_TO: ${{ secrets.AUTH_TO }}
+        run: |
+          npm install
+          npm run build
