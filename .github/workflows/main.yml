@@ -1,4 +1,4 @@
-name: Deploy Website
+name: Generate env.js
 
 on:
   push:
@@ -6,19 +6,26 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build and deploy
-        env:
-          AUTH_HOST: ${{ secrets.AUTH_HOST }}
-          AUTH_UN: ${{ secrets.AUTH_UN }}
-          AUTHTOK: ${{ secrets.AUTHTOK }}
-          AUTH_TO: ${{ secrets.AUTH_TO }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create env.js
         run: |
-          npm install
-          npm run build
+          echo "const env = {" > env.js
+          echo "  AUTH_HOST: '${{ secrets.AUTH_HOST }}'," >> env.js
+          echo "  AUTH_UN: '${{ secrets.AUTH_UN }}'," >> env.js
+          echo "  AUTHTOK: '${{ secrets.AUTHTOK }}'," >> env.js
+          echo "  AUTH_TO: '${{ secrets.AUTH_TO }}'" >> env.js
+          echo "};" >> env.js
