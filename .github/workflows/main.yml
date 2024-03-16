@@ -18,9 +18,6 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Inject secrets into HTML
         run: |
           echo "<script>" > secrets.js
@@ -29,4 +26,4 @@ jobs:
           echo "const authToken = '${{ secrets.AUTHTOK }}';" >> secrets.js
           echo "const authTarget = '${{ secrets.AUTH_TO }}';" >> secrets.js
           echo "</script>" >> secrets.js
-          cp secrets.js src/secrets.js  # Assuming your JavaScript file is in a 'src' directory
+          cat secrets.js  # Check if the secrets.js file has been created
