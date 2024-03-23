@@ -1,12 +1,17 @@
+const AUTH_HOST = process.env.AUTH_HOST;
+const AUTH_UN = process.env.AUTH_UN;
+const AUTHTOK = process.env.AUTHTOK;
+const AUTH_TO = process.env.AUTH_TO;
+
 function sendEmail(){
           var checkedmsz = document.getElementById('inpt4').checked ? 'Yes' : 'No';
           
           Email.send({
-              Host : process.env.AUTH_HOST,
-              Username :process.env.AUTH_UN,
-              Password : process.env.AUTHTOK,
-              To : process.env.AUTH_TO,
-              From : process.env.AUTH_UN,
+              Host : AUTH_HOST,
+              Username : AUTH_UN,
+              Password : AUTHTOK,
+              To : AUTH_TO,
+              From : AUTH_UN,
               Subject : "New Contact Form from " +
                 document.getElementById("inpt1").value,
               Body : "Name : " + document.getElementById("inpt1").value
