@@ -3,11 +3,7 @@
 * {
   margin: 0;
   padding: 0;
-<<<<<<< HEAD
   
-=======
-
->>>>>>> 0c596eb (initial commit)
 }
 html, body {
   height: 100%;
@@ -38,15 +34,9 @@ section h1 {
   transform: translate(-50%, -150%);
   color: #FEFEFE;
   font : normal 300 64px/1 'Josefin Sans', sans-serif;
-<<<<<<< HEAD
     
   text-align: center;
   white-space: nowrap;  
-=======
-
-  text-align: center;
-  white-space: nowrap;
->>>>>>> 0c596eb (initial commit)
 }
 
 section h3 {
